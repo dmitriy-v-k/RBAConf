@@ -60,8 +60,8 @@ namespace Tests
         public void CheckAccess_WithTasks_ReturnTrue_Test()
         {
             var role = new RbacRole("testRole", Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
-                new RbacTask("t1",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"]))),
-                new RbacTask("t2",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"])))
+                new RbacTask("t1", new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"]))),
+                new RbacTask("t2", new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"])))
             });
             Assert.IsTrue(role.CheckAccess("t1", new Dictionary<string, string>() {
                 { "id" , "test"}
@@ -72,8 +72,8 @@ namespace Tests
         public void CheckAccess_WithTasks2_ReturnTrue_Test()
         {
             var role = new RbacRole("testRole", Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
-                new RbacTask("t1",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"]))),
-                new RbacTask("t2",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"])))
+                new RbacTask("t1", new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"]))),
+                new RbacTask("t2", new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"])))
             });
             Assert.IsTrue(role.CheckAccess("t2",new Dictionary<string, string>() {
                 { "id" , "test"}
@@ -84,7 +84,7 @@ namespace Tests
         public void CheckAccess_WithTasks_ReturnFalse_Test()
         {
             var role = new RbacRole("testRole", Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
-                new RbacTask("t1",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"])))
+                new RbacTask("t1",new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"])))
             });
             Assert.IsFalse(role.CheckAccess("t3", new Dictionary<string, string>() {
                 { "id" , "test"}
@@ -95,8 +95,8 @@ namespace Tests
         public void CheckAccess_WithTasks_bizRuleReturnFalse_ReturnFalse_Test()
         {
             var role = new RbacRole("testRole", Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
-                new RbacTask("t1",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"]))),
-                new RbacTask("t2",new DefaultBizRule(_ => !string.IsNullOrEmpty(_["id"])))
+                new RbacTask("t1",new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"]))),
+                new RbacTask("t2",new RbacOperation("op2"), new BizRule(_ => !string.IsNullOrEmpty(_["id"])))
             });
             Assert.IsFalse(role.CheckAccess("t1", new Dictionary<string, string>() {
                 { "id" , null}
@@ -147,8 +147,8 @@ namespace Tests
         {
             var role = new RbacRole("testRole", Enumerable.Empty<IRbacOperation>(), Enumerable.Empty<IRbacTask>(), new IRbacRole[] {
                 new RbacRole("r1"),
-                new RbacRole("r2",Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
-                new RbacTask("t1",new DefaultBizRule(_ => _["id"] == "id1"))
+                new RbacRole("r2", Enumerable.Empty<IRbacOperation>(), new IRbacTask[] {
+                new RbacTask("t1", new RbacOperation("op2"), new BizRule(_ => _["id"] == "id1"))
             })
             });
             Assert.IsTrue(role.CheckAccess("t1", new Dictionary<string, string>() {

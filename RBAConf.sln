@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RBAConf", "RBAConf\RBAConf.csproj", "{419F5031-E721-43A2-BB4A-7CFEFF9B5D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBAConf.Tests", "RBAConf.Tests\RBAConf.Tests.csproj", "{400F5625-F355-49A1-B0B2-5C2BD62DF1AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RBAConf.Tests", "RBAConf.Tests\RBAConf.Tests.csproj", "{400F5625-F355-49A1-B0B2-5C2BD62DF1AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

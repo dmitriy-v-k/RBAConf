@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RBAConf
 {
@@ -8,30 +9,23 @@ namespace RBAConf
         private readonly IRbacOperation operation;
         private readonly IBizRule biznessRule;
 
-        public RbacTask(string operation, Func<IDictionary<string, string>, bool> biznessRule)
-            : this(operation, new DefaultBizRule(biznessRule))
+        public string Name { get; }
+
+        public RbacTask(string taskName, IRbacOperation operation, Func<IDictionary<string, string>, bool> biznessRule)
+            : this(taskName, operation, new BizRule(biznessRule))
         {
         }
 
-        public RbacTask(string operation, IBizRule biznessRule)
-            :this(new RbacOperation(operation), biznessRule)
+        public RbacTask(string taskName, IRbacOperation operation, IBizRule biznessRule)
         {
-        }
-
-        public RbacTask(IRbacOperation operation, IBizRule biznessRule)
-        {
+            Name = taskName;
             this.operation = operation;
             this.biznessRule = biznessRule;
         }
 
         public bool CheckAccess(string name, IDictionary<string, string> parameters)
         {
-            return operation.CheckAccess(name) && biznessRule.Check(parameters);
-        }
-
-        public bool CheckAccess(string name)
-        {
-            return CheckAccess(name, new Dictionary<string,string>());
+            return (Name == name || operation.CheckAccess(name)) && biznessRule.Check(parameters);
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace RBAConf
 {
-    public sealed class DefaultBizRule : IBizRule
+    public sealed class BizRule : IBizRule
     {
         private readonly Func<IDictionary<string, string>, bool> bizRuleLogic;
 
-        public DefaultBizRule(Func<IDictionary<string, string>, bool> bizRuleLogic)
+        public BizRule(Func<IDictionary<string, string>, bool> bizRuleLogic)
         {
             this.bizRuleLogic = bizRuleLogic;
         }

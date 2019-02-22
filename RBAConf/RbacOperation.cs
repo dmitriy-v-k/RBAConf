@@ -2,16 +2,16 @@
 {
     public sealed class RbacOperation : IRbacOperation
     {
-        private readonly string operationName;
+        public string Name { get; }
 
         public RbacOperation(string operationName)
         {
-            this.operationName = operationName;
+            Name = operationName;
         }
 
         public bool CheckAccess(string name)
         {
-            return operationName == name;
+            return Name == name;
         }
     }
 }

@@ -5,10 +5,11 @@ namespace RBAConf
 {
     public sealed class RbacRole : IRbacRole
     {
-        private readonly string roleName;
         private readonly IEnumerable<IRbacRole> rbacRoles;
         private readonly IEnumerable<IRbacTask> rbacTasks;
         private readonly IEnumerable<IRbacOperation> rbacOperations;
+
+        public string Name { get; }
 
         public RbacRole(string roleName)
             :this(roleName, Enumerable.Empty<IRbacOperation>())
@@ -27,7 +28,7 @@ namespace RBAConf
 
         public RbacRole(string roleName, IEnumerable<IRbacOperation> rbacOperations, IEnumerable<IRbacTask> rbacTasks, IEnumerable<IRbacRole> rbacRoles)
         {
-            this.roleName = roleName;
+            Name = roleName;
             this.rbacRoles = rbacRoles;
             this.rbacTasks = rbacTasks;
             this.rbacOperations = rbacOperations;
@@ -35,7 +36,7 @@ namespace RBAConf
 
         public bool CheckAccess(string name, IDictionary<string,string> parameters)
         {
-            return name == roleName
+            return name == Name
                 || rbacOperations.Any(_ => _.CheckAccess(name))
                 || rbacTasks.Any(_ => _.CheckAccess(name, parameters))
                 || rbacRoles.Any(_ => _.CheckAccess(name, parameters));

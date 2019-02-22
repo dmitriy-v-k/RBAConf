@@ -2,7 +2,7 @@
 
 namespace RBAConf
 {
-    public interface IRbacRole
+    public interface IRbacRole: IRbacEntity
     {
         bool CheckAccess(string name, IDictionary<string, string> parameters);
         bool CheckAccess(string name);

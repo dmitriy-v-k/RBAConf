@@ -19,7 +19,7 @@ namespace Tests
                     new RbacRole("r1")
                 },
                 new IRbacTask[] {
-                    new RbacTask("t1", new DefaultBizRule(_ => _["str"] == "str"))
+                    new RbacTask("t1", new RbacOperation("o1"), new BizRule(_ => _["str"] == "str"))
                 },
                 new IRbacOperation[] {
                     new RbacOperation("o1")
@@ -36,7 +36,7 @@ namespace Tests
                     new RbacRole("r1")
                 },
                 new IRbacTask[] {
-                    new RbacTask("t1", new DefaultBizRule(_ => _["str"] == "str"))
+                    new RbacTask("t1", new RbacOperation("o1"), new BizRule(_ => _["str"] == "str"))
                 },
                 new IRbacOperation[] {
                     new RbacOperation("o1")
@@ -53,7 +53,7 @@ namespace Tests
                     new RbacRole("r1")
                 },
                 new IRbacTask[] {
-                    new RbacTask("t1", new DefaultBizRule(_ => _["str"] == "str"))
+                    new RbacTask("t1", new RbacOperation("o1"), new BizRule(_ => _["str"] == "str"))
                 },
                 new IRbacOperation[] {
                     new RbacOperation("o1")
